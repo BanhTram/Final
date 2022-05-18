@@ -1,16 +1,16 @@
 app.classCtrl = function ($scope, $location) {
     $scope.klasses = [
-        { name: 'Lop', parentID: 0, prefix: '', belong: 'none', orderBy: 1000, level: 1 },
-        { name: 'Lop 10', parentID: 10, prefix: '', belong: 'none', orderBy: 2000, level: 1 },
+        { name: 'Lop', parentID: 0, prefix: '', belong: 'lop', orderBy: 1000, level: 1 },
+        { name: 'Lop 10', parentID: 10, prefix: '', belong: 'Lop', orderBy: 2000, level: 1 },
         { name: 'Lop 10A1', parentID: 10, prefix: '____', belong: 'Lop 10', orderBy: 2750, level: 3 },
         { name: 'Lop 10A2', parentID: 10, prefix: '____', belong: 'Lop 10', orderBy: 2850, level: 3 },
-        { name: 'Lop 11', parentID: 11, prefix: '', belong: 'none', orderBy: 3000, level: 1 },
+        { name: 'Lop 11', parentID: 11, prefix: '', belong: 'Lop', orderBy: 3000, level: 1 },
         { name: 'Lop 11A', parentID: 11, prefix: '__', belong: 'Lop 11', orderBy: 3500, level: 2 },
         { name: 'Lop 11A1', parentID: 11, prefix: '____', belong: 'Lop 11', orderBy: 3625, level: 3 },
         { name: 'Lop 11A2', parentID: 11, prefix: '____', belong: 'Lop 11', orderBy: 3687, level: 3 },
         { name: 'Lop 11B', parentID: 11, prefix: '__', belong: 'Lop 11', orderBy: 3750, level: 2 },
         { name: 'Lop 11C', parentID: 11, prefix: '__', belong: 'Lop 11', orderBy: 3875, level: 1 },
-        { name: 'Lop 12', parentID: 12, prefix: '', belong: 'none', orderBy: 4000, level: 1 },
+        { name: 'Lop 12', parentID: 12, prefix: '', belong: 'Lop', orderBy: 4000, level: 1 },
         { name: 'Lop 12A', parentID: 12, prefix: '__', belong: 'Lop 12', orderBy: 4500, level: 2 },
         { name: 'Lop 12A1', parentID: 12, prefix: '____', belong: 'Lop 12', orderBy: 4625, level: 3 },
         { name: 'Lop 12A2', parentID: 12, prefix: '____', belong: 'Lop 12', orderBy: 4687, level: 3 },
@@ -44,7 +44,7 @@ app.classCtrl = function ($scope, $location) {
     }
 
     $scope.editClass = function (klass, belong) {
-        if (belong == 'none') {
+        if (belong == 'lop') {
             alert("Ban khong the sua lop nay!");
         } else {
             $scope.klass = klass;
@@ -60,11 +60,11 @@ app.classCtrl = function ($scope, $location) {
         }
     }
 
-    $scope.maxLevel = function (array) {
-        var max = $scope.klasses[0].level;
-        for (var i = 1; i < $scope.klasses.length; i++) {
-            if (max < $scope.klasses[i]) {
-                max = $scope.klasses[i];
+    $scope.maxLevel = function (object) {
+        var max = 0;
+        for (var i = 1; i < object.length; i++) {
+            if (max <object[i].level) {
+                max = object[i].level;
             }
         }
         return max;
@@ -72,14 +72,30 @@ app.classCtrl = function ($scope, $location) {
 
     $scope.deleteClass = function (klass) {
         var index = $scope.klasses.indexOf(klass);
-        $scope.klasses.splice(index, 1);
-        // var tempParentID = $scope.klasses[index].parentID;
-        // var tempLevel = $scope.klasses[index].tempLevel;
-
+        var tempParentID = $scope.klasses[index].parentID;
+        var tempLevel = $scope.klasses[index].level;
+        var x = {};
+        // var maxLevel = $scope.maxLevel($scope.klasses);
+        // tempLevel <= $scope.maxLevel($scope.klasses)
+        for (var i = 0; i <= $scope.klasses.length; i++) {
+            // var temp1 = $scope.klasses[i].level;
+            // var temp2 = $scope.klasses[i].parentID;
+            // if ($scope.klasses[i].level === tempLevel && 
+            //     $scope.klasses[i].parentID === tempParentID
+            //     ){
+                
+            //     return alert(angular.toJson($scope.klasses[i]));
+            //     // $scope.klasses.splice(i, 1);
+            // }
+            // if($scope.klasses[i].level == tempLevel){
+            //     return $scope.x.push($scope.klasses[i]);
+            // }
+            // alert(angular.toJson($scope.klasses[i].level));
+            // alert(angular.toJson($scope.klasses[i].parentID));
+        }
         // alert($scope.maxLevel($scope.klasses));
-        
-        // for (var i = tempLevel; i <= Max.max($scope.klasses[index].level); i++) {
-        //     if ($scope.klasses.level == i && $scope.klasses.parentID == tempParentID)
-        // }
+        // alert(tempLevel);
+        // alert(angular.toJson(x));
+        // alert(tempParentID);
     }
 }
